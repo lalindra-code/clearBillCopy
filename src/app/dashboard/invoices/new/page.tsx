@@ -161,14 +161,17 @@ export default function NewInvoicePage() {
         body: JSON.stringify(invoiceData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         router.push("/dashboard");
       } else {
-        alert("Failed to create invoice");
+        console.error("API error:", data);
+        alert(`Failed to create invoice: ${data.error || "Unknown error"}`);
       }
     } catch (error) {
       console.error("Error creating invoice:", error);
-      alert("Failed to create invoice");
+      alert(`Failed to create invoice: ${error instanceof Error ? error.message : "Unknown error"}`);
     } finally {
       setIsSubmitting(false);
     }
