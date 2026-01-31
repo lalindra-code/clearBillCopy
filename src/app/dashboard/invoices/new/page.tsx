@@ -50,6 +50,10 @@ export default function NewInvoicePage() {
   const [taxRate, setTaxRate] = useState(0);
   const [notes, setNotes] = useState("");
 
+  // Logo
+  const [businessLogo, setBusinessLogo] = useState<string>("");
+  const [logoPreview, setLogoPreview] = useState<string>("");
+
   // Line items
   const [items, setItems] = useState<InvoiceItem[]>([
     { description: "", quantity: 1, unitPrice: 0 },
@@ -63,6 +67,36 @@ export default function NewInvoicePage() {
     if (items.length > 1) {
       setItems(items.filter((_, i) => i !== index));
     }
+  };
+
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Logo file must be less than 5MB");
+        return;
+      }
+
+      // Validate file type
+      if (!file.type.startsWith("image/")) {
+        alert("Please upload an image file");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setBusinessLogo(base64String);
+        setLogoPreview(base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeLogo = () => {
+    setBusinessLogo("");
+    setLogoPreview("");
   };
 
   const updateItem = (
@@ -103,6 +137,7 @@ export default function NewInvoicePage() {
       businessAddress,
       businessPhone,
       businessEmail,
+      businessLogo: businessLogo || undefined,
       clientName,
       clientAddress,
       clientPhone,
@@ -255,6 +290,40 @@ export default function NewInvoicePage() {
                     onChange={(e) => setBusinessEmail(e.target.value)}
                     placeholder="info@company.lk"
                   />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="businessLogo">Company Logo</Label>
+                  <div className="space-y-2">
+                    {logoPreview && (
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={logoPreview}
+                          alt="Logo preview"
+                          className="h-16 w-16 object-contain border rounded p-1"
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={removeLogo}
+                        >
+                          Remove Logo
+                        </Button>
+                      </div>
+                    )}
+                    {!logoPreview && (
+                      <input
+                        id="businessLogo"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleLogoUpload}
+                        className="block w-full text-sm border border-gray-300 rounded-md p-2 cursor-pointer"
+                      />
+                    )}
+                    <p className="text-xs text-muted-foreground">
+                      Optional. Max 5MB. Supported formats: PNG, JPG, GIF, SVG
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>

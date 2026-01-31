@@ -30,13 +30,22 @@ export function InvoicePreview({ invoice }: InvoicePreviewProps) {
     >
       {/* Header */}
       <div className="flex justify-between items-start mb-8 pb-8 border-b">
-        <div>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-            INVOICE
-          </h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">
-            {invoice.invoiceNumber}
-          </p>
+        <div className="flex items-start gap-4">
+          {invoice.businessLogo && (
+            <img
+              src={invoice.businessLogo}
+              alt="Company Logo"
+              className="h-16 w-16 object-contain"
+            />
+          )}
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+              INVOICE
+            </h1>
+            <p className="text-gray-500 dark:text-gray-400 mt-1">
+              {invoice.invoiceNumber}
+            </p>
+          </div>
         </div>
         <div className="text-right">
           <div className="text-sm text-gray-600 dark:text-gray-300">

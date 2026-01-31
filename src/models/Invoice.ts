@@ -17,6 +17,7 @@ export interface IInvoice extends Document {
   businessAddress: string;
   businessPhone?: string;
   businessEmail?: string;
+  businessLogo?: string; // Base64 encoded logo
 
   // Client details
   clientName: string;
@@ -60,6 +61,7 @@ const InvoiceSchema = new Schema<IInvoice>(
     businessAddress: { type: String, required: true },
     businessPhone: { type: String },
     businessEmail: { type: String },
+    businessLogo: { type: String },
 
     clientName: { type: String, required: true },
     clientAddress: { type: String, required: true },
