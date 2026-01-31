@@ -90,37 +90,42 @@ export default async function Dashboard() {
           /* Invoice List */
           <div className="grid gap-4">
             {invoices.map((invoice) => (
-              <Card key={invoice._id?.toString()}>
-                <CardHeader className="pb-2">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-lg">
-                        {invoice.invoiceNumber}
-                      </CardTitle>
-                      <CardDescription>{invoice.clientName}</CardDescription>
+              <Link
+                key={invoice._id?.toString()}
+                href={`/dashboard/invoices/${invoice._id?.toString()}`}
+              >
+                <Card className="cursor-pointer hover:shadow-md hover:border-primary transition-all">
+                  <CardHeader className="pb-2">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-lg">
+                          {invoice.invoiceNumber}
+                        </CardTitle>
+                        <CardDescription>{invoice.clientName}</CardDescription>
+                      </div>
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${getStatusColor(
+                          invoice.status
+                        )}`}
+                      >
+                        {invoice.status}
+                      </span>
                     </div>
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${getStatusColor(
-                        invoice.status
-                      )}`}
-                    >
-                      {invoice.status}
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-between items-center text-sm">
-                    <div className="text-muted-foreground">
-                      <span>Date: {formatDate(invoice.date)}</span>
-                      <span className="mx-2">|</span>
-                      <span>Due: {formatDate(invoice.dueDate)}</span>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex justify-between items-center text-sm">
+                      <div className="text-muted-foreground">
+                        <span>Date: {formatDate(invoice.date)}</span>
+                        <span className="mx-2">|</span>
+                        <span>Due: {formatDate(invoice.dueDate)}</span>
+                      </div>
+                      <div className="font-semibold text-lg">
+                        {formatCurrency(invoice.total)}
+                      </div>
                     </div>
-                    <div className="font-semibold text-lg">
-                      {formatCurrency(invoice.total)}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         )}
