@@ -2,77 +2,314 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-
+/* =========================================================
+   EcoBill Design System — Global Styles
+   ========================================================= */
 
 @layer base {
   :root {
-    --background: 140 20% 98%;
-    --foreground: 160 30% 10%;
+    /* shadcn/ui CSS Variables mapped to EcoBill brand */
+    --background: 0 0% 100%;
+    --foreground: 220 39% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 160 30% 10%;
+    --card-foreground: 220 39% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 160 30% 10%;
-    --primary: 152 69% 35%;
+    --popover-foreground: 220 39% 11%;
+
+    /* Primary = #22C278 ≈ HSL(152, 68%, 45%) */
+    --primary: 152 68% 45%;
     --primary-foreground: 0 0% 100%;
+
     --secondary: 140 20% 96%;
-    --secondary-foreground: 160 30% 10%;
-    --muted: 140 20% 96%;
-    --muted-foreground: 160 15% 45%;
-    --accent: 152 69% 95%;
-    --accent-foreground: 152 69% 25%;
+    --secondary-foreground: 220 39% 11%;
+    --muted: 140 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 152 60% 94%;
+    --accent-foreground: 158 88% 20%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 140 20% 90%;
-    --input: 140 20% 90%;
-    --ring: 152 69% 35%;
-    --chart-1: 152 69% 35%;
+    --border: 140 16% 91%;
+    --input: 140 16% 91%;
+    --ring: 152 68% 45%;
+    --chart-1: 152 68% 45%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
+
   .dark {
-    --background: 160 30% 4%;
+    --background: 222 47% 4%;
     --foreground: 140 20% 98%;
-    --card: 160 30% 6%;
+    --card: 222 47% 6%;
     --card-foreground: 140 20% 98%;
-    --popover: 160 30% 6%;
+    --popover: 222 47% 6%;
     --popover-foreground: 140 20% 98%;
-    --primary: 152 69% 45%;
-    --primary-foreground: 160 30% 4%;
-    --secondary: 160 20% 12%;
+    --primary: 152 68% 50%;
+    --primary-foreground: 222 47% 4%;
+    --secondary: 222 30% 12%;
     --secondary-foreground: 140 20% 98%;
-    --muted: 160 20% 12%;
+    --muted: 222 30% 12%;
     --muted-foreground: 140 10% 65%;
     --accent: 152 40% 15%;
-    --accent-foreground: 152 69% 70%;
-    --destructive: 0 62.8% 40%;
+    --accent-foreground: 152 68% 75%;
+    --destructive: 0 62% 40%;
     --destructive-foreground: 0 0% 98%;
-    --border: 160 20% 15%;
-    --input: 160 20% 15%;
-    --ring: 152 69% 45%;
-    --chart-1: 152 69% 45%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --border: 222 30% 15%;
+    --input: 222 30% 15%;
+    --ring: 152 68% 50%;
   }
 }
-
-
 
 @layer base {
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* =========================================================
+   Scroll Reveal Animations
+   ========================================================= */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-28px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(28px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.93);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   Gradient Text
+   ========================================================= */
+.gradient-text {
+  background: linear-gradient(135deg, #22c278 0%, #065f46 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, #22c278 0%, #10b981 50%, #065f46 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =========================================================
+   Hero Gradient Background
+   ========================================================= */
+.hero-gradient {
+  background: radial-gradient(
+      ellipse 80% 60% at 15% 40%,
+      rgba(34, 194, 120, 0.1) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 85% 20%,
+      rgba(6, 95, 70, 0.06) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 50% 80%,
+      rgba(34, 194, 120, 0.05) 0%,
+      transparent 60%
+    ),
+    #ffffff;
+}
+
+/* =========================================================
+   Card Hover Effects
+   ========================================================= */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 48px rgba(34, 194, 120, 0.1),
+    0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================================
+   Button Shine Effect
+   ========================================================= */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-15deg);
+  transition: left 0.6s ease;
+}
+
+.btn-shine:hover::after {
+  left: 120%;
+}
+
+/* =========================================================
+   Blob Decorative Shapes
+   ========================================================= */
+.blob {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  filter: blur(70px);
+  opacity: 0.12;
+  animation: blob-morph 10s ease-in-out infinite;
+}
+
+.blob-2 {
+  animation-delay: -3s;
+  animation-duration: 14s;
+}
+
+.blob-3 {
+  animation-delay: -6s;
+  animation-duration: 12s;
+}
+
+/* =========================================================
+   Section Divider (organic curve)
+   ========================================================= */
+.section-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* =========================================================
+   Noise Texture Overlay (very subtle)
+   ========================================================= */
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================================================
+   Custom Scrollbar
+   ========================================================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22c278;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #065f46;
+}
+
+/* =========================================================
+   Focus Ring
+   ========================================================= */
+:focus-visible {
+  outline: 2px solid #22c278;
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Text Balance
+   ========================================================= */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* =========================================================
+   Invoice Preview Print Styles
+   ========================================================= */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #invoice-preview,
+  #invoice-preview * {
+    visibility: visible;
+  }
+  #invoice-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
   }
 }
