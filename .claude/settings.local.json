@@ -4,7 +4,18 @@
       "Bash(curl:*)",
       "Bash(tasklist:*)",
       "Bash(taskkill:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(head:*)",
+      "Bash(cd \"C:/Users/lalindra/Documents/Projects/ecobill\" && npm run dev 2>&1)",
+      "Bash(net start:*)",
+      "Bash(grep:*)",
+      "Bash(where mongod:*)",
+      "Bash(nslookup:*)",
+      "Bash(Test-NetConnection:*)",
+      "Bash(powershell:*)",
+      "Bash(cd \"C:/Users/lalindra/Documents/Projects/ecobill\" && node -e \"\nconst mongoose = require\\('mongoose'\\);\nconst uri = 'mongodb://Vercel-Admin-atlas-fuchsia-yacht:0BQALpX2rKhaeFkY@ac-txawmge-shard-00-00.zczrizj.mongodb.net:27017,ac-txawmge-shard-00-01.zczrizj.mongodb.net:27017,ac-txawmge-shard-00-02.zczrizj.mongodb.net:27017/ecobill?tls=true&replicaSet=atlas-fuchsia-yacht-shard-0&authSource=admin';\nconsole.log\\('Connecting...'\\);\nmongoose.connect\\(uri, { family: 4, serverSelectionTimeoutMS: 10000 }\\)\n  .then\\(\\(\\) => { console.log\\('SUCCESS - Connected to MongoDB'\\); process.exit\\(0\\); }\\)\n  .catch\\(e => { console.error\\('FAILED:', e.message\\); process.exit\\(1\\); }\\);\n\" 2>&1)",
+      "Bash(cd \"C:/Users/lalindra/Documents/Projects/ecobill\" && node -e \"\nconst mongoose = require\\('mongoose'\\);\nconst uri = 'mongodb://Vercel-Admin-atlas-fuchsia-yacht:0BQALpX2rKhaeFkY@ac-txawmge-shard-00-00.zczrizj.mongodb.net:27017/ecobill?tls=true&authSource=admin&directConnection=true';\nconsole.log\\('Connecting with directConnection...'\\);\nmongoose.connect\\(uri, { family: 4, serverSelectionTimeoutMS: 10000 }\\)\n  .then\\(\\(\\) => { console.log\\('SUCCESS'\\); process.exit\\(0\\); }\\)\n  .catch\\(e => { console.error\\('FAILED:', e.message\\); process.exit\\(1\\); }\\);\n\" 2>&1)",
+      "Bash(cd \"C:/Users/lalindra/Documents/Projects/ecobill\" && node -e \"\nconst { MongoClient } = require\\('mongodb'\\);\nconst client = new MongoClient\\('mongodb://Vercel-Admin-atlas-fuchsia-yacht:0BQALpX2rKhaeFkY@ac-txawmge-shard-00-02.zczrizj.mongodb.net:27017/ecobill?tls=true&authSource=admin&directConnection=true', { family: 4 }\\);\nclient.connect\\(\\).then\\(async \\(\\) => {\n  const users = await client.db\\('ecobill'\\).collection\\('users'\\).find\\({}, { projection: { name:1, email:1, plan:1, createdAt:1, _id:0 } }\\).toArray\\(\\);\n  console.log\\('Users in DB:', JSON.stringify\\(users, null, 2\\)\\);\n  client.close\\(\\);\n}\\);\n\" 2>&1)"
     ]
   }
 }

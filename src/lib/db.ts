@@ -32,6 +32,7 @@ async function dbConnect(): Promise<typeof mongoose> {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      family: 4, // Force IPv4 — prevents c-ares IPv6 resolution failures on Windows
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
