@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ecobill.lk/sitemap.xml
+
+# Block crawling of API routes
+Disallow: /api/
+
+# Block crawling of old dashboard (internal tool)
+Disallow: /dashboard/
